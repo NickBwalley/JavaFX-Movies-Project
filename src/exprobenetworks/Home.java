@@ -1,5 +1,7 @@
-package genres;
+package exprobenetworks;
 
+import exprobenetworks.Genres;
+import exprobenetworks.Customers;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -17,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class Home extends Application{
     
-    
+    Stage user_dashboard = new Stage();
     
     @Override
     public void start(Stage primaryStage) {
@@ -102,10 +104,10 @@ public class Home extends Application{
         
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
 }

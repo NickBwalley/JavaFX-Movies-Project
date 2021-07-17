@@ -1,6 +1,5 @@
 package exprobenetworks;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -62,13 +61,15 @@ public class ExprobeNetworks extends Application {
           String statement = "SELECT * FROM exprobe_networks.users Where username = '"+username+"' AND password = '"+password+"' ";
           ResultSet rs = st.executeQuery(statement); //step four
           System.out.println(rs);
-          
+          Home usersdashboard = new Home();
           if(rs.next()){                   
                     Alert al = new Alert(Alert.AlertType.CONFIRMATION);
                     al.setContentText("Successful Login");
                     al.show();
                     //You can add the code to open HomePage (after successful login)
-                    
+                   
+                   usersdashboard.start(usersdashboard.user_dashboard);
+                  
                     
                 }else{
                     Alert a = new Alert(Alert.AlertType.WARNING);

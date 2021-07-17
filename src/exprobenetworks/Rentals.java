@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package genres;
+package exprobenetworks;
 
 
 import javafx.application.Application;
@@ -25,27 +25,33 @@ import javafx.stage.Stage;
  *
  * @author nickb
  */
-public class Customers extends Application {
-    Stage customers_stage = new Stage();
+public class Rentals extends Application {
+    
+    Stage rentals_stage = new Stage();
     
     @Override
     public void start(Stage stage) {
         
-        Text text1 = new Text("Name: ");
-        Text text2 = new Text("Phone: ");
-        Text text3 = new Text("Email: ");
-        Text text4 = new Text("Registered: ");
+        Text text1 = new Text("Customer: ");
+        Text text2 = new Text("Genre: ");
+        Text text3 = new Text("Movies: ");
+        Text text4 = new Text("Borrowed: ");
+        Text text5 = new Text("Returned: ");
         
-        TextField textField1 = new TextField();
-        TextField textField2 = new TextField();
-        TextField textField3 = new TextField();
-        ComboBox comboBox = new ComboBox();
+        ComboBox comboBox1 = new ComboBox();
+        ComboBox comboBox2 = new ComboBox();
+        ComboBox comboBox3 = new ComboBox();
+        ComboBox comboBox4 = new ComboBox();
+        ComboBox comboBox5 = new ComboBox();
         
-        comboBox.setMinSize(250, 10);
-       
-       
-        Button button1 = new Button("Save Customer");
-        Button button2 = new Button("Remove Customer");
+        comboBox1.setMinSize(250, 10);
+        comboBox2.setMinSize(250, 10);
+        comboBox3.setMinSize(250, 10);
+        comboBox4.setMinSize(250, 10);
+        comboBox5.setMinSize(250, 10);
+        
+        Button button1 = new Button("Save Rental");
+        Button button2 = new Button("Return Movie");
         
         button1.setMinSize(250, 5);
         button2.setMinSize(250, 5);
@@ -57,19 +63,24 @@ public class Customers extends Application {
         gridPane.setHgap(10);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.add(text1, 0, 0);
-        gridPane.add(textField1, 1, 0);
+        gridPane.add(comboBox1, 1, 0);
         
-        gridPane.add(text2, 0, 1);
-        gridPane.add(textField2, 1, 1);
+        gridPane.add(text2,   0, 1);
+        gridPane.add(comboBox2, 1, 1);
         
         gridPane.add(text3, 0, 2);
-        gridPane.add(textField3, 1, 2);
+        gridPane.add(comboBox3, 1, 2);
         
         
         gridPane.add(button1, 1, 3);
         gridPane.add(text4, 0, 4);
-        gridPane.add(comboBox, 1, 4);
+        
+        gridPane.add(comboBox4, 1, 4);
         gridPane.add(button2, 1, 5);
+        
+        gridPane.add(text5  , 0, 6);
+        gridPane.add(comboBox5, 1, 6);
+        
         
         button1.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
         button2.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
@@ -77,6 +88,8 @@ public class Customers extends Application {
         text2.setStyle("-fx-font: normal  20px 'serif' ");
         text3.setStyle("-fx-font: normal  20px 'serif' ");
         text4.setStyle("-fx-font: normal  20px 'serif' ");
+        text5.setStyle("-fx-font: normal  20px 'serif' ");
+        
         gridPane.setStyle("-fx-background-color: #9B9B9B; ");
         
         Scene scene = new Scene(gridPane);

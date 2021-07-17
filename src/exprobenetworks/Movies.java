@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package genres;
+package exprobenetworks;
 
 
 import javafx.application.Application;
