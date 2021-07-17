@@ -68,8 +68,8 @@ public class Home extends Application{
         //CUSTOMERS
         Customers1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
          public void handle(MouseEvent event) {        
-            Customers hp = new Customers();
-            hp.start(hp.customers_stage);
+            Customers cust = new Customers();
+            cust.start(cust.customers_stage);
          }
       }));
         

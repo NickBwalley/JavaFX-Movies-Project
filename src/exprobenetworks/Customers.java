@@ -6,16 +6,23 @@
 package exprobenetworks;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -31,24 +38,87 @@ public class Customers extends Application {
     @Override
     public void start(Stage stage) {
         
-        Text text1 = new Text("Name: ");
-        Text text2 = new Text("Phone: ");
-        Text text3 = new Text("Email: ");
+        Text name_label = new Text("Name: ");
+        Text phone_label = new Text("Phone: ");
+        Text email_label = new Text("Email: ");
         Text text4 = new Text("Registered: ");
+        Text printoutQry = new Text();
         
-        TextField textField1 = new TextField();
-        TextField textField2 = new TextField();
-        TextField textField3 = new TextField();
-        ComboBox comboBox = new ComboBox();
+        TextField name = new TextField();
+        TextField phone = new TextField();
+        TextField email = new TextField();
         
-        comboBox.setMinSize(250, 10);
+        ComboBox registered_users = new ComboBox();
+        
+        registered_users.setMinSize(250, 10);
        
        
-        Button button1 = new Button("Save Customer");
-        Button button2 = new Button("Remove Customer");
+        Button save_customer = new Button("Save Customer");
+        Button remove_customer = new Button("Remove Customer");
         
-        button1.setMinSize(250, 5);
-        button2.setMinSize(250, 5);
+        
+        //REGISTER AND INSERT INFORMATION TO THE DATABASE
+        save_customer.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            public void handle(MouseEvent event){
+                final String name1 = name.getText();
+                final String phone1 = phone.getText();
+                final String email1 = email.getText();
+                
+                try
+                {
+                    //step one
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    
+                    //step two
+                    Connection con  = DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks", "root","");
+                    
+                    //step three
+                    Statement stmt = con.createStatement();
+                    
+                    //step four
+                    String mySQL_stmt = "INSERT INTO `customers`(`name`,`phone`, `email`) VALUES ("+"'"+name1+"'"+","+"'"+phone1+"'"+","+"'"+email1+"'"+")";
+                    System.out.println(mySQL_stmt);
+                    stmt.executeUpdate(mySQL_stmt);
+                    
+                    //step five
+                    con.close();
+                    printoutQry.setText("Record Successfully Saved!");
+                }
+                catch(Exception ee){
+                    System.out.println("ee");printoutQry.setText("Record NOT SAVED!");;
+                }
+                
+            }
+        });
+        
+        //DISPLAY LIST OF REGISTERED USERS IN THE CUSTOMERS TABLE
+        //registered_users.setOnMouseClicked((new EventHandler<MouseEvent>() { 
+          //  public void handle(MouseEvent event) {        
+        //String username = user_name_tf.getText();
+        //String password = pass_field.getText();
+        
+        try{
+          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
+
+
+          Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?autoReconnect=true&useSSL=false","root","");  //step two
+          
+          Statement st=con.createStatement();   //step three
+          String statement = "SELECT * FROM javafx.customers Where name = '"+name+"' ";
+          ResultSet rs = st.executeQuery(statement); //step four
+          
+                    
+          con.close();
+            
+        }
+        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
+     
+        
+        
+                
+        
+        save_customer.setMinSize(250, 5);
+        remove_customer.setMinSize(250, 5);
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
@@ -56,32 +126,33 @@ public class Customers extends Application {
         gridPane.setVgap(10);
         gridPane.setHgap(10);
         gridPane.setAlignment(Pos.CENTER);
-        gridPane.add(text1, 0, 0);
-        gridPane.add(textField1, 1, 0);
+        gridPane.add(name_label, 0, 0);
+        gridPane.add(name, 1, 0);
         
-        gridPane.add(text2, 0, 1);
-        gridPane.add(textField2, 1, 1);
+        gridPane.add(phone_label, 0, 1);
+        gridPane.add(phone, 1, 1);
         
-        gridPane.add(text3, 0, 2);
-        gridPane.add(textField3, 1, 2);
+        gridPane.add(email_label, 0, 2);
+        gridPane.add(email, 1, 2);
         
         
-        gridPane.add(button1, 1, 3);
+        gridPane.add(save_customer, 1, 3);
         gridPane.add(text4, 0, 4);
-        gridPane.add(comboBox, 1, 4);
-        gridPane.add(button2, 1, 5);
+        gridPane.add(registered_users, 1, 4);
+        gridPane.add(remove_customer, 1, 5);
+        gridPane.add(printoutQry, 1, 6);
         
-        button1.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
-        button2.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
-        text1.setStyle("-fx-font: normal  20px 'serif' ");
-        text2.setStyle("-fx-font: normal  20px 'serif' ");
-        text3.setStyle("-fx-font: normal  20px 'serif' ");
+        save_customer.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
+        remove_customer.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
+        name.setStyle("-fx-font: normal  20px 'serif' ");
+        phone.setStyle("-fx-font: normal  20px 'serif' ");
+        email.setStyle("-fx-font: normal  20px 'serif' ");
         text4.setStyle("-fx-font: normal  20px 'serif' ");
         gridPane.setStyle("-fx-background-color: #9B9B9B; ");
         
         Scene scene = new Scene(gridPane);
         
-        stage.setTitle("Movie Library System");
+        stage.setTitle("Movie Library System(Customer)");
         stage.setScene(scene);
         stage.show();
         
