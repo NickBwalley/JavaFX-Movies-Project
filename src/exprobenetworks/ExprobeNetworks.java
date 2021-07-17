@@ -99,6 +99,8 @@ public class ExprobeNetworks extends Application {
             primaryStage.close();
         }
     }));
+    
+    
    
   //GRIDPANE
     GridPane gridPane = new GridPane();
