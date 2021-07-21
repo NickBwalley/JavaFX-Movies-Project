@@ -9,10 +9,12 @@ package exprobenetworks;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -35,6 +37,8 @@ import javafx.stage.Stage;
 public class Customers extends Application {
     Stage customers_stage = new Stage();
     
+    
+    
     @Override
     public void start(Stage stage) {
         
@@ -48,10 +52,12 @@ public class Customers extends Application {
         TextField phone = new TextField();
         TextField email = new TextField();
         
-        ComboBox registered_users = new ComboBox();
+        String week_days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+                     
+        ComboBox registered_users = new ComboBox(FXCollections.observableArrayList(week_days));
         
         registered_users.setMinSize(250, 10);
-       
+      
        
         Button save_customer = new Button("Save Customer");
         Button remove_customer = new Button("Remove Customer");
@@ -91,30 +97,7 @@ public class Customers extends Application {
             }
         });
         
-        //DISPLAY LIST OF REGISTERED USERS IN THE CUSTOMERS TABLE
-        //registered_users.setOnMouseClicked((new EventHandler<MouseEvent>() { 
-          //  public void handle(MouseEvent event) {        
-        //String username = user_name_tf.getText();
-        //String password = pass_field.getText();
-        
-        try{
-          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
-
-
-          Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?autoReconnect=true&useSSL=false","root","");  //step two
-          
-          Statement st=con.createStatement();   //step three
-          String statement = "SELECT * FROM javafx.customers Where name = '"+name+"' ";
-          ResultSet rs = st.executeQuery(statement); //step four
-          
-                    
-          con.close();
-            
-        }
-        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
-     
-        
-        
+           
                 
         
         save_customer.setMinSize(250, 5);
@@ -158,6 +141,10 @@ public class Customers extends Application {
         
        
         
+    }
+    
+    public static void main(String[] args){
+        launch(args);
     }
     
 }

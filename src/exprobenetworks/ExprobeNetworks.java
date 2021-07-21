@@ -63,9 +63,9 @@ public class ExprobeNetworks extends Application {
           System.out.println(rs);
           Home usersdashboard = new Home();
           if(rs.next()){                   
-                    Alert al = new Alert(Alert.AlertType.CONFIRMATION);
-                    al.setContentText("Successful Login");
-                    al.show();
+//                    Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+//                    al.setContentText("Successful Login");
+//                    al.show();
                     //You can add the code to open HomePage (after successful login)
                    
                    usersdashboard.start(usersdashboard.user_dashboard);
