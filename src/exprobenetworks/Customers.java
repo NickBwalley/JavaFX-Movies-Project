@@ -61,6 +61,40 @@ public class Customers extends Application {
        
         Button save_customer = new Button("Save Customer");
         Button remove_customer = new Button("Remove Customer");
+        Button registered = new Button("View Registered");
+        
+        
+        
+        
+        //Event Handler for the login_button    
+    registered.setOnMouseClicked((new EventHandler<MouseEvent>() { 
+    public void handle(MouseEvent event) {        
+        //String username = user_name_tf.getText();
+        //String password = pass_field.getText();
+        
+        try{
+          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
+
+
+            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
+          
+          Statement st=con.createStatement();   //step three
+          String statement = "SELECT *  from customers";
+          ResultSet rs = st.executeQuery(statement); //step four
+
+          while(rs.next()){
+            String col=rs.getString("name"); 
+              System.out.println(col);
+           // gives you column value on each iteration
+          }
+          con.close();
+            
+        }
+        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
+     
+        
+        }
+    }));
         
         
         //REGISTER AND INSERT INFORMATION TO THE DATABASE
@@ -124,6 +158,8 @@ public class Customers extends Application {
         gridPane.add(registered_users, 1, 4);
         gridPane.add(remove_customer, 1, 5);
         gridPane.add(printoutQry, 1, 6);
+        gridPane.add(registered, 1, 7);
+
         
         save_customer.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
         remove_customer.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
