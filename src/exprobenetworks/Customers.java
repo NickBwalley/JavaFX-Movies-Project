@@ -36,8 +36,8 @@ import javafx.stage.Stage;
  */
 public class Customers extends Application {
     Stage customers_stage = new Stage();
-    
-    
+    Connection con;
+    ComboBox registered_users;
     
     @Override
     public void start(Stage stage) {
@@ -52,31 +52,28 @@ public class Customers extends Application {
         TextField phone = new TextField();
         TextField email = new TextField();
         
-        String week_days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-                     
-        ComboBox registered_users = new ComboBox(FXCollections.observableArrayList(week_days));
         
-        registered_users.setMinSize(250, 10);
-      
+                     
+        
+         
        
         Button save_customer = new Button("Save Customer");
         Button remove_customer = new Button("Remove Customer");
         Button registered = new Button("View Registered");
         
         
-        
-        
-        //Event Handler for the login_button    
-    registered.setOnMouseClicked((new EventHandler<MouseEvent>() { 
-    public void handle(MouseEvent event) {        
-        //String username = user_name_tf.getText();
-        //String password = pass_field.getText();
+        // List registered users fillComboBox() method
+        registered.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            public void handle(MouseEvent event){
+                fillComboBox();
+            }
+        });
         
         try{
           Class.forName("com.mysql.cj.jdbc.Driver"); //step one
 
 
-            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
+           con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
           
           Statement st=con.createStatement();   //step three
           String statement = "SELECT *  from customers";
@@ -85,16 +82,26 @@ public class Customers extends Application {
           while(rs.next()){
             String col=rs.getString("name"); 
               System.out.println(col);
+              registered_users = new ComboBox(FXCollections.observableArrayList(col));
+              registered_users.setMinSize(250, 10);
+              
            // gives you column value on each iteration
           }
           con.close();
             
         }
-        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
-     
-        
+        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");
         }
-    }));
+        
+        
+        
+        
+        
+        
+        //String week_days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+        //registered_users = new ComboBox(FXCollections.observableArrayList(week_days));
+        
+        //registered_users.setMinSize(250, 10);
         
         
         //REGISTER AND INSERT INFORMATION TO THE DATABASE
@@ -176,6 +183,35 @@ public class Customers extends Application {
         stage.show();
         
        
+       
+       
+        
+    }
+    
+    //method fillComboBox
+    public void fillComboBox(){
+        try{
+          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
+
+
+           con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
+          
+          Statement st=con.createStatement();   //step three
+          String statement = "SELECT *  from customers";
+          ResultSet rs = st.executeQuery(statement); //step four
+
+          while(rs.next()){
+            String col=rs.getString("name"); 
+              System.out.println(col);
+              // registered_users = new ComboBox(FXCollections.observableArrayList(col));
+              // System.out.println(registered_users);
+           // gives you column value on each iteration
+          }
+          con.close();
+            
+        }
+        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");
+        } 
         
     }
     
