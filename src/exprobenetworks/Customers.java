@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
@@ -82,7 +83,9 @@ public class Customers extends Application {
           while(rs.next()){
             String col=rs.getString("name"); 
               System.out.println(col);
-              registered_users = new ComboBox(FXCollections.observableArrayList(col));
+              ArrayList<String> myList = new ArrayList<>();
+              myList.add(col);
+              registered_users = new ComboBox(FXCollections.observableArrayList(myList));
               registered_users.setMinSize(250, 10);
               
            // gives you column value on each iteration
