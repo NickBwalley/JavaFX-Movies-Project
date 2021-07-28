@@ -80,7 +80,7 @@ public class Customers extends Application {
             
             while(rs.next())
             {                
-                 System.out.println(rs.getString("name"));
+                 // System.out.println(rs.getString("name"));
                  names_list.add(rs.getString("name")); 
             }           
             
@@ -111,9 +111,23 @@ public class Customers extends Application {
                     //step three
                     Statement stmt = con.createStatement();
                     
+                    //Step Four
+                    String query = "SELECT name FROM exprobe_networks.customers";
+                    ResultSet rs = stmt.executeQuery(query);            
+
+                    while(rs.next())
+                    {                
+                         //System.out.println(rs.getString("name"));
+                         names_list.add(rs.getString("name")); 
+                    }           
+
+                    names.setItems(names_list);
+                    //print out selected item in combobox
+                    String userChoice = names.getSelectionModel().getSelectedItem().toString();
+                    // System.out.println(userChoice);
                     
-                    String del_stmt = "DELETE FROM customers WHERE `name` = 'Nick'";
-                    System.out.println(del_stmt);
+                    String del_stmt = "DELETE FROM customers WHERE `name` = '"+userChoice+"' ";
+                    //System.out.println(del_stmt);
                     stmt.executeUpdate(del_stmt);
                     
                     //step five
@@ -204,10 +218,6 @@ public class Customers extends Application {
         stage.setTitle("Movie Library System(Customer)");
         stage.setScene(scene);
         stage.show();
-        
-       
-       
-       
         
     }
     
