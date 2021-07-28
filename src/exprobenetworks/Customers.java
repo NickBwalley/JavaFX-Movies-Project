@@ -75,7 +75,7 @@ public class Customers extends Application {
             Statement st=con.createStatement();
             
             //Step Four
-                String query = "SELECT name FROM exprobe_networks.customers";
+            String query = "SELECT name FROM exprobe_networks.customers";
             ResultSet rs = st.executeQuery(query);            
             
             while(rs.next())
@@ -90,10 +90,42 @@ public class Customers extends Application {
             con.close();
           }
         
-        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
+        catch(Exception ee){
+            System.out.println(ee);
+            System.out.println("Connection error");
+        } 
         names.getItems().addAll("");
         
         
+        //REMOVE CUSTOMER
+        remove_customer.setOnMouseClicked(new EventHandler<MouseEvent>(){
+           public void handle(MouseEvent event){
+                
+               try{
+                    //step one
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    
+                    //step two
+                    Connection con  = DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks", "root","");
+                    
+                    //step three
+                    Statement stmt = con.createStatement();
+                    
+                    
+                    String del_stmt = "DELETE FROM customers WHERE `name` = 'Nick'";
+                    System.out.println(del_stmt);
+                    stmt.executeUpdate(del_stmt);
+                    
+                    //step five
+                    con.close();
+                    printoutQry.setText("Record Successfully Deleted!");
+                    
+                    
+               }catch(Exception e){
+                   System.out.println("ee");printoutQry.setText("Record NOT DELETED!");;
+               }
+           } 
+        });
         
         //REGISTER AND INSERT INFORMATION TO THE DATABASE
         save_customer.setOnMouseClicked(new EventHandler<MouseEvent>(){
