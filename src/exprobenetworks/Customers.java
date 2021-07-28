@@ -37,8 +37,7 @@ import javafx.stage.Stage;
  */
 public class Customers extends Application {
     Stage customers_stage = new Stage();
-    Connection con;
-    ComboBox registered_users;
+    
     
     @Override
     public void start(Stage stage) {
@@ -60,51 +59,40 @@ public class Customers extends Application {
        
         Button save_customer = new Button("Save Customer");
         Button remove_customer = new Button("Remove Customer");
-        Button registered = new Button("View Registered");
         
         
-        // List registered users fillComboBox() method
-        registered.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent event){
-                fillComboBox();
-            }
-        });
-        
-        try{
-          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
-
-
-           con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
-          
-          Statement st=con.createStatement();   //step three
-          String statement = "SELECT *  from customers";
-          ResultSet rs = st.executeQuery(statement); //step four
-
-          while(rs.next()){
-            String col=rs.getString("name"); 
-              System.out.println(col);
-              ArrayList<String> myList = new ArrayList<>();
-              myList.add(col);
-              registered_users = new ComboBox(FXCollections.observableArrayList(myList));
-              registered_users.setMinSize(250, 10);
-              
-           // gives you column value on each iteration
-          }
-          con.close();
+        ComboBox names = new ComboBox();
+        ObservableList<String> names_list= FXCollections.observableArrayList();
+        try
+        {
+            //Step One
+            Class.forName("com.mysql.cj.jdbc.Driver");
             
-        }
-        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");
-        }
+            //Step Two
+            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");
+            
+            //Step Three
+            Statement st=con.createStatement();
+            
+            //Step Four
+                String query = "SELECT name FROM exprobe_networks.customers";
+            ResultSet rs = st.executeQuery(query);            
+            
+            while(rs.next())
+            {                
+                 System.out.println(rs.getString("name"));
+                 names_list.add(rs.getString("name")); 
+            }           
+            
+            names.setItems(names_list);
+            
+            //Step five
+            con.close();
+          }
         
+        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");} 
+        names.getItems().addAll("");
         
-        
-        
-        
-        
-        //String week_days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        //registered_users = new ComboBox(FXCollections.observableArrayList(week_days));
-        
-        //registered_users.setMinSize(250, 10);
         
         
         //REGISTER AND INSERT INFORMATION TO THE DATABASE
@@ -165,10 +153,10 @@ public class Customers extends Application {
         
         gridPane.add(save_customer, 1, 3);
         gridPane.add(text4, 0, 4);
-        gridPane.add(registered_users, 1, 4);
+        gridPane.add(names, 1, 4);
         gridPane.add(remove_customer, 1, 5);
         gridPane.add(printoutQry, 1, 6);
-        gridPane.add(registered, 1, 7);
+        
 
         
         save_customer.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
@@ -188,33 +176,6 @@ public class Customers extends Application {
        
        
        
-        
-    }
-    
-    //method fillComboBox
-    public void fillComboBox(){
-        try{
-          Class.forName("com.mysql.cj.jdbc.Driver"); //step one
-
-
-           con =DriverManager.getConnection("jdbc:mysql://localhost:3306/exprobe_networks?autoReconnect=true&useSSL=false","root","");  //step two
-          
-          Statement st=con.createStatement();   //step three
-          String statement = "SELECT *  from customers";
-          ResultSet rs = st.executeQuery(statement); //step four
-
-          while(rs.next()){
-            String col=rs.getString("name"); 
-              System.out.println(col);
-              // registered_users = new ComboBox(FXCollections.observableArrayList(col));
-              // System.out.println(registered_users);
-           // gives you column value on each iteration
-          }
-          con.close();
-            
-        }
-        catch(Exception ee){System.out.println(ee);System.out.println("Connection error");
-        } 
         
     }
     
