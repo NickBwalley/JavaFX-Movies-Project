@@ -1,7 +1,7 @@
-package exprobenetworks;
+package aoopmovies;
 
-import exprobenetworks.Genres;
-import exprobenetworks.Customers;
+import aoopmovies.Genres;
+import aoopmovies.Customers;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

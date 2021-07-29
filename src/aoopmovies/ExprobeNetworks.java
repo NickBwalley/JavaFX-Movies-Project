@@ -1,4 +1,4 @@
-package exprobenetworks;
+package aoopmovies;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
