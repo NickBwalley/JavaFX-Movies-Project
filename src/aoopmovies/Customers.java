@@ -145,9 +145,9 @@ public class Customers extends Application {
      Scene myScene = new Scene(gridPane);
      return myScene;
     }
-    
-    public static void main(String[] args){
-        launch(args);
-    }
+//    
+//    public static void main(String[] args){
+//        launch(args);
+//    }
     
 }
