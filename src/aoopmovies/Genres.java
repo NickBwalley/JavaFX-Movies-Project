@@ -6,8 +6,11 @@
 package aoopmovies;
 
 
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,8 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -29,48 +32,70 @@ public class Genres extends Application {
     
     @Override
     public void start(Stage stage) {
+        stage.setTitle("Genres");
+        stage.setScene(genreScene());
+        stage.show();
+    }
+    
+    public static Scene genreScene(){
+        //gridPane()
+        GridPane gridPane = new GridPane();
         
         Text text1 = new Text("Name: ");
         Text text2  = new Text("Registered: ");
+        Text printoutQry = new Text("");
         
-        TextField textField1 = new TextField();
-        textField1.setMinSize(250, 5);
+        TextField genre_name = new TextField();
+        genre_name.setMinSize(250, 5);
         ComboBox comboBox = new ComboBox();
         comboBox.setMinSize(250, 10);
         
-        Button button1 = new Button("Save");
-        button1.setMinSize(250, 5);
-        Button button2 = new Button("Remove");
-        button2.setMinSize(250, 5);
+        Button save_genre = new Button("Save");
+        save_genre.setMinSize(250, 5);
+        Button remove_genre = new Button("Remove");
+        remove_genre.setMinSize(250, 5);
         
-        GridPane gridPane = new GridPane();
+        //REGISTER GENRE
+        EventHandler<MouseEvent> registerGenre = (MouseEvent e) ->{
+            try{
+                Implementations.registerGenre(genre_name.getText());
+                printoutQry.setText("Genre Successfully Registered!");
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        save_genre.setOnMouseClicked(registerGenre);
+        // remove_genre.setOnMouseClicked(removeGenre);
+        
+        
+        
         gridPane.setMinSize(600, 400);
         gridPane.setPadding(new Insets(10,10,10,10));
         gridPane.setVgap(10);
         gridPane.setHgap(10);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.add(text1, 0, 0);
-        gridPane.add(textField1, 1, 0);
-        gridPane.add(button1, 1, 1);
+        gridPane.add(genre_name, 1, 0);
+        gridPane.add(save_genre, 1, 1);
         gridPane.add(text2, 0, 2);
         gridPane.add(comboBox, 1, 2);
-        gridPane.add(button2, 1, 3);
+        gridPane.add(save_genre, 1, 3);
+        gridPane.add(remove_genre, 1, 4);
         
-        button1.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
-        button2.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
+        save_genre.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
+        remove_genre.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
         text1.setStyle("-fx-font: normal bold 20px 'serif' ");
         text2.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: #9B9B9B; ");
         
-        Scene scene = new Scene(gridPane);
+        Scene my_scene = new Scene(gridPane);
         
-        stage.setTitle("Movie Library System");
-        stage.setScene(scene);
-        stage.show();
-        
-       
-        
+        return my_scene;
     }
-
+    
+    public static void main(String[] args){
+        launch(args);
+    }
     
 }

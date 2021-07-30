@@ -77,10 +77,22 @@ public class Implementations {
         Statement st = conn.createStatement();
         String query = "DELETE FROM customers WHERE name='"+name+"'";
         st.executeUpdate(query);
-        System.out.println(name + " Successfully Deleted!");
+        System.out.println(name + " successfully Deleted!");
         conn.close();
         
     }
-     
+    
+    /*-------------------------------------------------------------------------
+        GENRES
+      -------------------------------------------------------------------------*/
+     //REGISTER GENRE   
+    public static void registerGenre(String genre_name)throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "INSERT INTO genres(genre_name) VALUES('"+genre_name+"')";
+        st.executeUpdate(query);
+        System.out.println(genre_name + " successfully registered!");
+        conn.close();
+    }
     
 }
