@@ -109,4 +109,14 @@ public class Implementations {
         conn.close();
     }
     
+    // DELETE GENRE
+    public static void deleteGenre(String name) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "DELETE FROM genres WHERE genre_name='"+name+"'";
+        st.executeUpdate(query);
+        System.out.println( name + " successfully deleted");
+        conn.close();
+    }
+    
 }

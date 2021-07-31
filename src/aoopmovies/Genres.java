@@ -82,9 +82,21 @@ public class Genres extends Application {
             }
         };
         
+        //DELETE GENRE
+        EventHandler<MouseEvent> deleteGenre = (MouseEvent e) ->{
+            try{
+                Implementations.deleteGenre((String) comboBox.getValue());
+                printoutQry.setText("Genre Deleted!");
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
+            }
+        };
+        
+        
+        
         save_genre.setOnMouseClicked(registerGenre);
         comboBox.setOnMouseClicked(fetchGenre);
-        // remove_genre.setOnMouseClicked(removeGenre);
+        remove_genre.setOnMouseClicked(deleteGenre);
         
         
         gridPane.setMinSize(600, 400);
