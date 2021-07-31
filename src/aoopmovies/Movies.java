@@ -6,8 +6,13 @@
 package aoopmovies;
 
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -47,6 +53,7 @@ public class Movies extends Application {
         
         
         ComboBox registered_movies = new ComboBox();
+        ObservableList<String> genre_list1 = FXCollections.observableArrayList();
         
         genre_list.setMinSize(250, 20);
         registered_movies.setMinSize(250, 20);
@@ -56,6 +63,19 @@ public class Movies extends Application {
         
         save_movie.setMinSize(250, 5);
         remove_movie.setMinSize(250, 5);
+        
+        //FETCH GENRE IN COMBOBOX
+        EventHandler<MouseEvent> fetchGenre = (MouseEvent e) ->{
+            genre_list.getItems().clear();
+            genre_list1.clear();
+            try{
+                Implementations.fetchGenre(genre_list, genre_list1);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        genre_list.setOnMouseClicked(fetchGenre);
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
