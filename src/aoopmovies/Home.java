@@ -58,12 +58,12 @@ public class Home extends Application{
       }));
         
         //GENRES
-//        Genres1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
-//         public void handle(MouseEvent event) {        
-//            Genres hp = new Genres();
-//            hp.start(hp.genres_stage);
-//         }
-//      }));
+        Genres1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
+         public void handle(MouseEvent event) {        
+            Genres hp = new Genres();
+            hp.start(hp.genres_stage);
+         }
+      }));
         
         //CUSTOMERS
         Customers1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
