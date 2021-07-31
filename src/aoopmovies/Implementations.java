@@ -142,5 +142,19 @@ public class Implementations {
         conn.close();
     }
     
+    // FETCH LIST OF REGISTERED MOVIES IN A SPECIFIC GENRE
+    public static void fetchRegisteredMovies(String genre_name, ComboBox genre, ObservableList<String> genre_list1) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT movie_name FROM movies WHERE genre_name='"+genre_name+"'";
+        ResultSet rs = st.executeQuery(query);
+        
+        while(rs.next()){
+            genre_list1.add(rs.getString("movie_name"));
+        }
+        genre.setItems(genre_list1);
+        conn.close();
+    }
+    
 }
   

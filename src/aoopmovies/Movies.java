@@ -75,7 +75,7 @@ public class Movies extends Application {
             }
         };
         
-        // GET USER ID
+        // REGISTER MOVIE 
         EventHandler<MouseEvent> registerMovie = (MouseEvent e) -> {
             try{
                 Implementations.registerMovie((String) genre_list.getValue(), movie_name.getText());
@@ -85,8 +85,22 @@ public class Movies extends Application {
             }
         };
         
+        // FETCH LIST OF REGISTERED MOVIES IN A GENRE
+        EventHandler<MouseEvent> fetchRegisteredMovies = (MouseEvent e) ->{
+            // registered_movies.getItems().clear();
+            // genre_list1.clear();
+            
+            try{
+                Implementations.fetchRegisteredMovies((String) genre_list.getValue(), registered_movies, genre_list1);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        
         genre_list.setOnMouseClicked(fetchGenre);
         save_movie.setOnMouseClicked(registerMovie);
+        registered_movies.setOnMouseClicked(fetchRegisteredMovies);
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
