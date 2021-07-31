@@ -6,30 +6,21 @@
 package aoopmovies;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -107,6 +98,7 @@ public class Customers extends Application {
         
         save_customer.setMinSize(250, 5);
         remove_customer.setMinSize(250, 5);
+        names.setMinSize(250, 5);
         
         
         gridPane.setMinSize(600, 400);
@@ -145,9 +137,9 @@ public class Customers extends Application {
      Scene myScene = new Scene(gridPane);
      return myScene;
     }
-//    
-//    public static void main(String[] args){
-//        launch(args);
-//    }
+    
+    public static void main(String[] args){
+        launch(args);
+    }
     
 }
