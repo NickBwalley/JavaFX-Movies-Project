@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -46,7 +48,10 @@ public class Genres extends Application {
         
         TextField genre_name = new TextField();
         genre_name.setMinSize(250, 5);
+        
         ComboBox comboBox = new ComboBox();
+        ObservableList<String> genre_list= FXCollections.observableArrayList();
+        
         comboBox.setMinSize(250, 10);
         
         Button save_genre = new Button("Save");
@@ -65,7 +70,20 @@ public class Genres extends Application {
             }
         };
         
+        
+        //FETCH GENRE IN COMBOBOX
+        EventHandler<MouseEvent> fetchGenre = (MouseEvent e) ->{
+            comboBox.getItems().clear();
+            genre_list.clear();
+            try{
+                Implementations.fetchGenre(comboBox, genre_list);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
         save_genre.setOnMouseClicked(registerGenre);
+        comboBox.setOnMouseClicked(fetchGenre);
         // remove_genre.setOnMouseClicked(removeGenre);
         
         

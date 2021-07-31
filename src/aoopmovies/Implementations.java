@@ -95,4 +95,18 @@ public class Implementations {
         conn.close();
     }
     
+    //FETCH AND DISPLAY GENRE IN COMBOBOX
+    public static void fetchGenre(ComboBox genre, ObservableList<String> registeredList) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT genre_name from genres";
+        ResultSet rs = st.executeQuery(query);
+        
+        while(rs.next()){
+            registeredList.add(rs.getString("genre_name"));
+        }
+        genre.setItems(registeredList);
+        conn.close();
+    }
+    
 }
