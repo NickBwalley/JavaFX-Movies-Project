@@ -84,7 +84,6 @@ public class Movies extends Application {
         gridPane.setStyle("-fx-background-color: #9B9B9B; ");
         
         Scene scene = new Scene(gridPane);
-        
         stage.setTitle("Movie Library System");
         stage.setScene(scene);
         stage.show();
