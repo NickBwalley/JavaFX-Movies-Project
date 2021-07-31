@@ -119,4 +119,20 @@ public class Implementations {
         conn.close();
     }
     
+    /*-------------------------------------------------------------------------
+        MOVIES
+      -------------------------------------------------------------------------*/
+    // REGISTER MOVIE
+    public static void registerMovie(String name) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT id FROM genres WHERE genre_name='"+name+"'";
+        ResultSet rs = st.executeQuery(query);
+        while(rs.next()){
+            int genre_id = rs.getInt("id");
+            System.out.println(genre_id);
+        }
+        conn.close();
+    }
+    
 }

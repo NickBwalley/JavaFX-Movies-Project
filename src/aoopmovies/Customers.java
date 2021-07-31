@@ -138,8 +138,8 @@ public class Customers extends Application {
      return myScene;
     }
     
-    public static void main(String[] args){
-        launch(args);
-    }
+//    public static void main(String[] args){
+//        launch(args);
+//    }
     
 }

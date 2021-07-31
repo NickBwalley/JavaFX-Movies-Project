@@ -75,7 +75,18 @@ public class Movies extends Application {
             }
         };
         
+        // GET USER ID
+        EventHandler<MouseEvent> registerMovie = (MouseEvent e) -> {
+            try{
+                Implementations.registerMovie((String) genre_list.getValue());
+                // System.out.println((String) genre_list.getValue());
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
+            }
+        };
+        
         genre_list.setOnMouseClicked(fetchGenre);
+        save_movie.setOnMouseClicked(registerMovie);
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
