@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  *
  * @author a47
  */
-public class ExprobeNetworks extends Application {
+public class Login extends Application {
     
     @Override
     public void start(Stage primaryStage) {

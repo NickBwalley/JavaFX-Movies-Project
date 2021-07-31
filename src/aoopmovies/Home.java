@@ -1,7 +1,7 @@
 package aoopmovies;
 
-import aoopmovies.Genres;
-import aoopmovies.Customers;
+
+import aoopmovies.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -58,12 +58,12 @@ public class Home extends Application{
       }));
         
         //GENRES
-        Genres1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
-         public void handle(MouseEvent event) {        
-            Genres hp = new Genres();
-            hp.start(hp.genres_stage);
-         }
-      }));
+//        Genres1.setOnMouseClicked((new EventHandler<MouseEvent>() { 
+//         public void handle(MouseEvent event) {        
+//            Genres hp = new Genres();
+//            hp.start(hp.genres_stage);
+//         }
+//      }));
         
         //CUSTOMERS
         Customers1.setOnMouseClicked((new EventHandler<MouseEvent>() { 

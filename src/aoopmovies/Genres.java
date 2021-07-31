@@ -6,11 +6,11 @@
 package aoopmovies;
 
 
-
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -38,9 +39,7 @@ public class Genres extends Application {
     }
     
     public static Scene genreScene(){
-        //gridPane()
         GridPane gridPane = new GridPane();
-        
         Text text1 = new Text("Name: ");
         Text text2  = new Text("Registered: ");
         Text printoutQry = new Text("");
@@ -54,6 +53,7 @@ public class Genres extends Application {
         save_genre.setMinSize(250, 5);
         Button remove_genre = new Button("Remove");
         remove_genre.setMinSize(250, 5);
+        
         
         //REGISTER GENRE
         EventHandler<MouseEvent> registerGenre = (MouseEvent e) ->{
@@ -69,7 +69,6 @@ public class Genres extends Application {
         // remove_genre.setOnMouseClicked(removeGenre);
         
         
-        
         gridPane.setMinSize(600, 400);
         gridPane.setPadding(new Insets(10,10,10,10));
         gridPane.setVgap(10);
@@ -80,8 +79,8 @@ public class Genres extends Application {
         gridPane.add(save_genre, 1, 1);
         gridPane.add(text2, 0, 2);
         gridPane.add(comboBox, 1, 2);
-        gridPane.add(save_genre, 1, 3);
-        gridPane.add(remove_genre, 1, 4);
+        gridPane.add(remove_genre, 1, 3);
+        gridPane.add(printoutQry, 1, 4);
         
         save_genre.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
         remove_genre.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
@@ -89,12 +88,11 @@ public class Genres extends Application {
         text2.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: #9B9B9B; ");
         
-        Scene my_scene = new Scene(gridPane);
-        
-        return my_scene;
+        Scene scene = new Scene(gridPane);
+        return scene;
     }
     
-    public static void main(String[] args){
+    public static void main (String[] args){
         launch(args);
     }
     
