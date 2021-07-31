@@ -46,7 +46,7 @@ public class Movies extends Application {
         Text text0 = new Text("Genres: ");
         Text text1 = new Text("Name: ");
         Text text2  = new Text("Registered: ");
-        // Text printoutQry = new Text("");
+        Text printoutQry = new Text("");
         TextField movie_name = new TextField();
         
         ComboBox genre_list = new ComboBox();
@@ -79,6 +79,7 @@ public class Movies extends Application {
         EventHandler<MouseEvent> registerMovie = (MouseEvent e) -> {
             try{
                 Implementations.registerMovie((String) genre_list.getValue(), movie_name.getText());
+                printoutQry.setText(movie_name.getText() + " successfully added to "+ genre_list.getValue());
             }catch(SQLException ex){
                 Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
             }
@@ -103,6 +104,7 @@ public class Movies extends Application {
         gridPane.add(text2, 0, 3);
         gridPane.add(registered_movies, 1, 3);
         gridPane.add(remove_movie, 1, 4);
+        gridPane.add(printoutQry, 1, 5);
         
         save_movie.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
         remove_movie.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
