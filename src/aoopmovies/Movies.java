@@ -46,7 +46,7 @@ public class Movies extends Application {
         Text text0 = new Text("Genres: ");
         Text text1 = new Text("Name: ");
         Text text2  = new Text("Registered: ");
-        
+        // Text printoutQry = new Text("");
         TextField movie_name = new TextField();
         
         ComboBox genre_list = new ComboBox();
@@ -78,8 +78,7 @@ public class Movies extends Application {
         // GET USER ID
         EventHandler<MouseEvent> registerMovie = (MouseEvent e) -> {
             try{
-                Implementations.registerMovie((String) genre_list.getValue());
-                // System.out.println((String) genre_list.getValue());
+                Implementations.registerMovie((String) genre_list.getValue(), movie_name.getText());
             }catch(SQLException ex){
                 Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
             }
