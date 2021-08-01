@@ -156,5 +156,20 @@ public class Implementations {
         conn.close();
     }
     
+    /*-------------------------------------------------------------------------
+        RENTALS
+      -------------------------------------------------------------------------*/
+    public static void borrowMovie(String customer_name, String genre_name, String movie_name, String borrowed_movie, String returned_movie )throws SQLException{
+        System.out.println(customer_name);
+        System.out.println(genre_name);
+        System.out.println(movie_name);
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "INSERT INTO rentals(customer_name, genre_name, movie_name, borrowed_movie, returned_movie) "
+                + "VALUES('"+customer_name+"', '"+genre_name+"', '"+movie_name+"', '"+borrowed_movie+"', '"+returned_movie+"')";
+        st.executeUpdate(query);
+        System.out.println(customer_name + " successfully borrowed " + movie_name);
+        conn.close();
+    }
 }
   

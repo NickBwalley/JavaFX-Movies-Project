@@ -50,12 +50,16 @@ public class Rentals extends Application {
         Text text3 = new Text("Movies: ");
         Text text4 = new Text("Borrowed: ");
         Text text5 = new Text("Returned: ");
+        Text borrowed_movie = new Text("");
+        Text returned_movie = new Text("");
+        Text printoutQry = new Text("");
         
         ComboBox comboBox1 = new ComboBox();
         ComboBox comboBox2 = new ComboBox();
         ComboBox comboBox3 = new ComboBox();
         ComboBox comboBox4 = new ComboBox();
         ComboBox comboBox5 = new ComboBox();
+        
         ObservableList<String> genre_list1 = FXCollections.observableArrayList();
         ObservableList<String> genre_list2 = FXCollections.observableArrayList();
         ObservableList<String> genre_list3 = FXCollections.observableArrayList();
@@ -113,6 +117,19 @@ public class Rentals extends Application {
         comboBox3.setOnMouseClicked(fetchRegisteredMovies);
         
         
+        // CUSTOMER RENT/BORROW MOVIE 
+        EventHandler<MouseEvent> borrowMovie = (MouseEvent e) -> {
+            try{
+                Implementations.borrowMovie((String) comboBox1.getValue(), (String) comboBox2.getValue(), (String) comboBox3.getValue(), borrowed_movie.getText(), returned_movie.getText());
+                // printoutQry.setText((String) comboBox1.getValue());
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
+            }
+            // printoutQry.setText((String) comboBox3.getValue());
+        };
+        
+        button1.setOnMouseClicked(borrowMovie);
+        
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
         gridPane.setPadding(new Insets(10,10,10,10));
@@ -137,6 +154,7 @@ public class Rentals extends Application {
         
         gridPane.add(text5  , 0, 6);
         gridPane.add(comboBox5, 1, 6);
+        gridPane.add(printoutQry, 1, 7);
         
         
         button1.setStyle("-fx-background-color: #1A88A5; -fx-text-fill: white; -fx-font-size:13pt;");
