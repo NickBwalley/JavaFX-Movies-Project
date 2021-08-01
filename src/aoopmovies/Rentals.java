@@ -6,8 +6,13 @@
 package aoopmovies;
 
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -50,6 +56,7 @@ public class Rentals extends Application {
         ComboBox comboBox3 = new ComboBox();
         ComboBox comboBox4 = new ComboBox();
         ComboBox comboBox5 = new ComboBox();
+        ObservableList<String> genre_list1 = FXCollections.observableArrayList();
         
         comboBox1.setMinSize(250, 10);
         comboBox2.setMinSize(250, 10);
@@ -62,6 +69,33 @@ public class Rentals extends Application {
         
         button1.setMinSize(250, 5);
         button2.setMinSize(250, 5);
+        
+        //Fetch Customer
+        EventHandler<MouseEvent> fetchCustomer = (MouseEvent e) ->{
+            comboBox1.getItems().clear();
+            genre_list1.clear();
+            
+            try{
+                Implementations.fetchCustomer(comboBox1, genre_list1);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        comboBox1.setOnMouseClicked(fetchCustomer);
+        
+        
+        // FETCH LIST OF REGISTERED MOVIES IN A GENRE
+//        EventHandler<MouseEvent> fetchRegisteredMovies = (MouseEvent e) ->{
+//            // registered_movies.getItems().clear();
+//            // genre_list1.clear();
+//            
+//            try{
+//                Implementations.fetchRegisteredMovies((String) comboBox2.getValue(), registered_movies, genre_list1);
+//            }catch(SQLException ex){
+//                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        };
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
