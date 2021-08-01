@@ -64,6 +64,7 @@ public class Rentals extends Application {
         ObservableList<String> genre_list2 = FXCollections.observableArrayList();
         ObservableList<String> genre_list3 = FXCollections.observableArrayList();
         ObservableList<String> genre_list4 = FXCollections.observableArrayList();
+        ObservableList<String> genre_list5 = FXCollections.observableArrayList();
         
         comboBox1.setMinSize(250, 10);
         comboBox2.setMinSize(250, 10);
@@ -143,6 +144,20 @@ public class Rentals extends Application {
         comboBox4.setOnMouseClicked(fetchBorrowedMovies);
         button1.setOnMouseClicked(borrowMovie);
         
+        // RETURN MOVIE BORROWED BY CUSTOMER
+        EventHandler<MouseEvent> customerReturnMovie = (MouseEvent e) ->{
+            // registered_movies.getItems().clear();
+            genre_list5.clear();
+            
+            try{
+                Implementations.customerReturnMovie((String)comboBox1.getValue(), (String)comboBox4.getValue());
+                System.out.println((String) comboBox1.getValue());
+                System.out.println((String) comboBox4.getValue());
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        button2.setOnMouseClicked(customerReturnMovie);
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);

@@ -183,5 +183,24 @@ public class Implementations {
         conn.close();
     }
     
+    //UPDATE ON CUSTOMER RETURN MOVIE
+    public static void customerReturnMovie(String customer_name, String borrowed_movie) throws SQLException{
+//        System.out.println(customer_name);
+//        System.out.println(borrowed_movie);
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT id from rentals WHERE customer_name = '"+customer_name+"' AND borrowed_movie = '"+borrowed_movie+"'";    
+        ResultSet rs = st.executeQuery(query);
+        while(rs.next()){
+            int id = rs.getInt("id");
+            System.out.println(id);
+        }
+        //String query = "UPDATE rentals SET  borrowed_movie = '', returned_movie = '"+name+"' WHERE id = '"+id+"' ";
+        //st.executeUpdate(query2);
+        //System.out.println( name + " successfully returned!");
+        // System.out.println(query2);
+        conn.close();
+    }
+    
 }
   
