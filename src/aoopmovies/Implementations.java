@@ -194,8 +194,10 @@ public class Implementations {
         while(rs.next()){
             int id = rs.getInt("id");
             System.out.println(id);
+            String query2 = "UPDATE rentals SET  borrowed_movie = '', returned_movie = '"+borrowed_movie+"' WHERE id = '"+id+"' ";
+            st.executeUpdate(query2);
         }
-        //String query = "UPDATE rentals SET  borrowed_movie = '', returned_movie = '"+name+"' WHERE id = '"+id+"' ";
+        
         //st.executeUpdate(query2);
         //System.out.println( name + " successfully returned!");
         // System.out.println(query2);
