@@ -165,8 +165,8 @@ public class Implementations {
         System.out.println(movie_name);
         Connection conn = dbConnect();
         Statement st = conn.createStatement();
-        String query = "INSERT INTO rentals(customer_name, genre_name, movie_name, borrowed_movie, returned_movie) "
-                + "VALUES('"+customer_name+"', '"+genre_name+"', '"+movie_name+"', '"+borrowed_movie+"', '"+returned_movie+"')";
+        String query = "INSERT INTO rentals(customer_name, genre_name, borrowed_movie, returned_movie) "
+                + "VALUES('"+customer_name+"', '"+genre_name+"', '"+movie_name+"', '"+returned_movie+"')";
         st.executeUpdate(query);
         System.out.println(customer_name + " successfully borrowed " + movie_name);
         conn.close();
