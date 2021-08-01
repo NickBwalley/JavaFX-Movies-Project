@@ -63,6 +63,7 @@ public class Rentals extends Application {
         ObservableList<String> genre_list1 = FXCollections.observableArrayList();
         ObservableList<String> genre_list2 = FXCollections.observableArrayList();
         ObservableList<String> genre_list3 = FXCollections.observableArrayList();
+        ObservableList<String> genre_list4 = FXCollections.observableArrayList();
         
         comboBox1.setMinSize(250, 10);
         comboBox2.setMinSize(250, 10);
@@ -121,14 +122,27 @@ public class Rentals extends Application {
         EventHandler<MouseEvent> borrowMovie = (MouseEvent e) -> {
             try{
                 Implementations.borrowMovie((String) comboBox1.getValue(), (String) comboBox2.getValue(), (String) comboBox3.getValue(), borrowed_movie.getText(), returned_movie.getText());
-                // printoutQry.setText((String) comboBox1.getValue());
+                printoutQry.setText((String) comboBox1.getValue() + " successfully borrowed " + (String) comboBox3.getValue());
             }catch(SQLException ex){
                 Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE,null, ex);
             }
             // printoutQry.setText((String) comboBox3.getValue());
         };
         
+        // FETCH LIST OF BORROWED MOVIES BY A CUSTOMER
+        EventHandler<MouseEvent> fetchBorrowedMovies = (MouseEvent e) ->{
+            // registered_movies.getItems().clear();
+            genre_list4.clear();
+            
+            try{
+                Implementations.fetchBorrowedMovies((String) comboBox1.getValue(), comboBox4, genre_list4);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        comboBox4.setOnMouseClicked(fetchBorrowedMovies);
         button1.setOnMouseClicked(borrowMovie);
+        
         
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);

@@ -159,17 +159,29 @@ public class Implementations {
     /*-------------------------------------------------------------------------
         RENTALS
       -------------------------------------------------------------------------*/
+    // BORROW MOVIE
     public static void borrowMovie(String customer_name, String genre_name, String movie_name, String borrowed_movie, String returned_movie )throws SQLException{
-        System.out.println(customer_name);
-        System.out.println(genre_name);
-        System.out.println(movie_name);
         Connection conn = dbConnect();
         Statement st = conn.createStatement();
         String query = "INSERT INTO rentals(customer_name, genre_name, borrowed_movie, returned_movie) "
                 + "VALUES('"+customer_name+"', '"+genre_name+"', '"+movie_name+"', '"+returned_movie+"')";
         st.executeUpdate(query);
-        System.out.println(customer_name + " successfully borrowed " + movie_name);
         conn.close();
     }
+    
+    // FETCH BORROWED MOVIES BY A CUSTOMER
+    public static void fetchBorrowedMovies(String customer_name, ComboBox genre, ObservableList<String> genre_list1) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT borrowed_movie FROM rentals WHERE customer_name='"+customer_name+"'";
+        ResultSet rs = st.executeQuery(query);
+        // genre_list1.clear();
+        while(rs.next()){
+            genre_list1.add(rs.getString("borrowed_movie"));
+        }
+        genre.setItems(genre_list1);
+        conn.close();
+    }
+    
 }
   
