@@ -122,8 +122,8 @@ public class Genres extends Application {
         return scene;
     }
     
-    public static void main (String[] args){
-        launch(args);
-    }
+//    public static void main (String[] args){
+//        launch(args);
+//    }
     
 }
