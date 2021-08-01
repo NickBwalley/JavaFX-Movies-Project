@@ -85,6 +85,19 @@ public class Rentals extends Application {
         comboBox1.setOnMouseClicked(fetchCustomer);
         
         
+        //FETCH GENRE IN COMBOBOX
+        EventHandler<MouseEvent> fetchGenre = (MouseEvent e) ->{
+            comboBox2.getItems().clear();
+            genre_list1.clear();
+            try{
+                Implementations.fetchGenre(comboBox2, genre_list1);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        comboBox2.setOnMouseClicked(fetchGenre);
+        
         // FETCH LIST OF REGISTERED MOVIES IN A GENRE
 //        EventHandler<MouseEvent> fetchRegisteredMovies = (MouseEvent e) ->{
 //            // registered_movies.getItems().clear();
