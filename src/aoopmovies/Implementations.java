@@ -148,7 +148,7 @@ public class Implementations {
         Statement st = conn.createStatement();
         String query = "SELECT movie_name FROM movies WHERE genre_name='"+genre_name+"'";
         ResultSet rs = st.executeQuery(query);
-        genre_list1.clear();
+        // genre_list1.clear();
         while(rs.next()){
             genre_list1.add(rs.getString("movie_name"));
         }

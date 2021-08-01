@@ -57,6 +57,8 @@ public class Rentals extends Application {
         ComboBox comboBox4 = new ComboBox();
         ComboBox comboBox5 = new ComboBox();
         ObservableList<String> genre_list1 = FXCollections.observableArrayList();
+        ObservableList<String> genre_list2 = FXCollections.observableArrayList();
+        ObservableList<String> genre_list3 = FXCollections.observableArrayList();
         
         comboBox1.setMinSize(250, 10);
         comboBox2.setMinSize(250, 10);
@@ -87,10 +89,10 @@ public class Rentals extends Application {
         
         //FETCH GENRE IN COMBOBOX
         EventHandler<MouseEvent> fetchGenre = (MouseEvent e) ->{
-            comboBox2.getItems().clear();
-            genre_list1.clear();
+            // comboBox2.getItems().clear();
+            // genre_list1.clear();
             try{
-                Implementations.fetchGenre(comboBox2, genre_list1);
+                Implementations.fetchGenre(comboBox2, genre_list3);
             }catch(SQLException ex){
                 Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,10 +102,9 @@ public class Rentals extends Application {
         
         // FETCH LIST OF REGISTERED MOVIES IN A GENRE
         EventHandler<MouseEvent> fetchRegisteredMovies = (MouseEvent e) ->{
-            // registered_movies.getItems().clear();
-            // genre_list1.clear();
+            comboBox3.getItems().clear();
             try{
-                Implementations.fetchRegisteredMovies((String) comboBox2.getValue(), comboBox3, genre_list1);
+                Implementations.fetchRegisteredMovies((String) comboBox2.getValue(), comboBox3, genre_list2);
             }catch(SQLException ex){
                 Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
             }
