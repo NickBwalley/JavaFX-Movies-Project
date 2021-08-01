@@ -30,7 +30,14 @@ public class Rentals extends Application {
     Stage rentals_stage = new Stage();
     
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage){
+        stage.setTitle("Rentals");
+        stage.setScene(rentalScene());
+        stage.show();
+    }
+    
+    
+    public static Scene rentalScene() {
         
         Text text1 = new Text("Customer: ");
         Text text2 = new Text("Genre: ");
@@ -94,12 +101,12 @@ public class Rentals extends Application {
         
         Scene scene = new Scene(gridPane);
         
-        stage.setTitle("Movie Library System");
-        stage.setScene(scene);
-        stage.show();
+        return scene;
         
-       
-        
+    }
+    
+    public static void main(String [] args){
+        launch(args);
     }
     
 }
