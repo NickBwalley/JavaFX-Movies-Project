@@ -204,5 +204,18 @@ public class Implementations {
         conn.close();
     }
     
+    // FETCH RETURNED MOVIES BY A CUSTOMER
+    public static void fetchReturnedMovies(String customer_name, ComboBox genre, ObservableList<String> genre_list4) throws SQLException{
+        Connection conn = dbConnect();
+        Statement st = conn.createStatement();
+        String query = "SELECT returned_movie FROM rentals WHERE customer_name='"+customer_name+"'";
+        ResultSet rs = st.executeQuery(query);
+        // genre_list1.clear();
+        while(rs.next()){
+            genre_list4.add(rs.getString("returned_movie"));
+        }
+        genre.setItems(genre_list4);
+        conn.close();
+    }
 }
   

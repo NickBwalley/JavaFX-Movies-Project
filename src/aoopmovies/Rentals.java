@@ -159,6 +159,20 @@ public class Rentals extends Application {
         };
         button2.setOnMouseClicked(customerReturnMovie);
         
+        // FETCH LIST OF BORROWED MOVIES BY A CUSTOMER
+        EventHandler<MouseEvent> fetchReturnedMovies = (MouseEvent e) ->{
+            // registered_movies.getItems().clear();
+            genre_list4.clear();
+            
+            try{
+                Implementations.fetchReturnedMovies((String) comboBox1.getValue(), comboBox5, genre_list4);
+            }catch(SQLException ex){
+                Logger.getLogger(Implementations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+        
+        comboBox5.setOnMouseClicked(fetchReturnedMovies);
+        
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 400);
         gridPane.setPadding(new Insets(10,10,10,10));
